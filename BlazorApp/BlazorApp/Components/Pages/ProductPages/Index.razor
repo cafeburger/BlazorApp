@@ -1,0 +1,29 @@
+﻿@page "/products"
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@inject BlazorApp.Data.BlazorAppContext DB
+@using BlazorApp.Data.Entities
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="products/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.Product">
+    <PropertyColumn Property="product => product.Name" />
+    <PropertyColumn Property="product => product.Description" />
+    <PropertyColumn Property="product => product.Price" />
+    <PropertyColumn Property="product => product.Stock" />
+    <PropertyColumn Property="product => product.IsActive" />
+    <PropertyColumn Property="product => product.CreatedDate" />
+    <PropertyColumn Property="product => product.UpdatedDate" />
+
+    <TemplateColumn Context="product">
+        <a href="@($"products/edit?productid={product.ProductId}")">Edit</a> |
+        <a href="@($"products/details?productid={product.ProductId}")">Details</a> |
+        <a href="@($"products/delete?productid={product.ProductId}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
