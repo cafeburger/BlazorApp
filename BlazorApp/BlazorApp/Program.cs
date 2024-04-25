@@ -17,9 +17,14 @@ namespace BlazorApp
             //builder.Services.AddDbContext<BlazorAppContext>(options =>
             //    options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
             // 添加 DbContext
+            string databaseUrl = builder.Configuration["ConnectionStrings:DefaultConnection"];
+            string userId = Environment.GetEnvironmentVariable("DB_USER");
+            string password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            string connectionString = $"{databaseUrl} user={userId}; password={password};";
+            
             builder.Services.AddDbContext<BlazorAppContext>(options =>
                 options.UseMySql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    connectionString,
                     new MySqlServerVersion(new Version(8, 0, 21)) // 確保指定正確的 MySQL 版本
                 ));
 
