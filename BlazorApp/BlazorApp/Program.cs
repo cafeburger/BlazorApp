@@ -14,19 +14,19 @@ namespace BlazorApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            //builder.Services.AddDbContext<BlazorAppContext>(options =>
-            //    options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
-            // ²K¥[ DbContext
-            string databaseUrl = builder.Configuration["ConnectionStrings:DefaultConnection"];
-            string userId = Environment.GetEnvironmentVariable("DB_USER");
-            string password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-            string connectionString = $"{databaseUrl} user={userId}; password={password};";
-            
             builder.Services.AddDbContext<BlazorAppContext>(options =>
-                options.UseMySql(
-                    connectionString,
-                    new MySqlServerVersion(new Version(8, 0, 21)) // ½T«O«ü©w¥¿½Tªº MySQL ª©¥»
-                ));
+               options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
+            
+            // string databaseUrl = builder.Configuration["ConnectionStrings:DefaultConnection"];
+            // string userId = Environment.GetEnvironmentVariable("DB_USER");
+            // string password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            // string connectionString = $"{databaseUrl} user={userId}; password={password};";
+            
+            // builder.Services.AddDbContext<BlazorAppContext>(options =>
+            //     options.UseMySql(
+            //         connectionString,
+            //         new MySqlServerVersion(new Version(8, 0, 21)) // ï¿½Tï¿½Oï¿½ï¿½ï¿½wï¿½ï¿½ï¿½Tï¿½ï¿½ MySQL ï¿½ï¿½ï¿½ï¿½
+            //     ));
 
             builder.Services.AddQuickGridEntityFrameworkAdapter();;
 
