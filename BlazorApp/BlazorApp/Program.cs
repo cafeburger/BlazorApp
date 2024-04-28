@@ -12,7 +12,8 @@ namespace BlazorApp
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<BlazorAppContext>(options =>
-               options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
+               options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") 
+               ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
             
             // string databaseUrl = builder.Configuration["ConnectionStrings:DefaultConnection"];
             // string userId = Environment.GetEnvironmentVariable("DB_USER");
@@ -22,10 +23,10 @@ namespace BlazorApp
             // builder.Services.AddDbContext<BlazorAppContext>(options =>
             //     options.UseMySql(
             //         connectionString,
-            //         new MySqlServerVersion(new Version(8, 0, 21)) // �T�O���w���T�� MySQL ����
+            //         new MySqlServerVersion(new Version(8, 0, 21)) // 確保指定正確的 MySQL 版本
             //     ));
 
-            builder.Services.AddQuickGridEntityFrameworkAdapter();;
+            builder.Services.AddQuickGridEntityFrameworkAdapter();
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
