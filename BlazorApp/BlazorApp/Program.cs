@@ -1,10 +1,7 @@
-using BlazorApp.Client.Pages;
 using BlazorApp.Components;
-using Microsoft.FluentUI.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using BlazorApp.Data;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 
 namespace BlazorApp
@@ -16,7 +13,7 @@ namespace BlazorApp
             var builder = WebApplication.CreateBuilder(args);
             //builder.Services.AddDbContext<BlazorAppContext>(options =>
             //    options.UseSqlite(builder.Configuration.GetConnectionString("BlazorAppContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppContext' not found.")));
-            // ≤K•[ DbContext
+            // Ê∑ªÂä† DbContext
             string databaseUrl = builder.Configuration["ConnectionStrings:DefaultConnection"];
             string userId = Environment.GetEnvironmentVariable("DB_USER");
             string password = Environment.GetEnvironmentVariable("DB_PASSWORD");
@@ -25,7 +22,7 @@ namespace BlazorApp
             builder.Services.AddDbContext<BlazorAppContext>(options =>
                 options.UseMySql(
                     connectionString,
-                    new MySqlServerVersion(new Version(8, 0, 21)) // ΩT´O´¸©w•øΩT™∫ MySQL ™©•ª
+                    new MySqlServerVersion(new Version(8, 0, 21)) // Á¢∫‰øùÊåáÂÆöÊ≠£Á¢∫ÁöÑ MySQL ÁâàÊú¨
                 ));
 
             builder.Services.AddQuickGridEntityFrameworkAdapter();;
